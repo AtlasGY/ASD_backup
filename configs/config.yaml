@@ -1,0 +1,90 @@
+# training version
+#version: STgram_MFN_arcface(s=30, m=0.5)
+version: STgram_MFN_adacos(m=0.5)
+
+# dir / file
+model_dir: ./model_param
+result_dir: ./result
+result_file: result.csv
+data_dir: ./data/dev_dataset
+pre_data_dir: ./data/pre_data
+
+# p_AUC
+max_fpr: 0.1
+
+# feature
+sr: 16000
+n_mels: 128 # 128
+frames: 313
+skip_frames: 1
+n_fft: 1024
+hop_length: 512
+win_length: 1024
+power: 2.0
+
+# train
+epochs: 5
+batch_size: 32
+workers: 8
+lr: 1e-4
+cuda: True
+device_ids:
+  - 0
+save_every_n_epochs: 50
+early_stop: 10
+
+num_class: 21
+
+
+
+
+
+# loss
+losstype: adacos
+lamda: 0
+margin: 0.5
+scale: 30
+
+
+#ID_factor: {
+#       ToyCar: 0,
+#       ToyTrain: 1,
+#       bearing: 2,
+#       fan: 3,
+#       gearbox: 4,
+#       slider: 5,
+#       valve: 6,
+#}
+
+process_machines:
+  - ToyCar
+  - ToyTrain
+  - bearing
+  - fan
+  - gearbox
+  - slider
+  - valve
+
+ID_factor: {
+       ToyCar_sec_00: 0,
+       ToyCar_sec_01: 1,
+       ToyCar_sec_02: 2,
+       ToyTrain_sec_00: 3,
+       ToyTrain_sec_01: 4,
+       ToyTrain_sec_02: 5,
+       bearing_sec_00: 6,
+       bearing_sec_01: 7,
+       bearing_sec_02: 8,
+       fan_sec_00: 9,
+       fan_sec_01: 10,
+       fan_sec_02: 11,
+       gearbox_sec_00: 12,
+       gearbox_sec_01: 13,
+       gearbox_sec_02: 14,
+       slider_sec_00: 15,
+       slider_sec_01: 16,
+       slider_sec_02: 17,
+       valve_sec_00: 18,
+       valve_sec_01: 19,
+       valve_sec_02: 20,
+}
